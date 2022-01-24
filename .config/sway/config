@@ -1,0 +1,157 @@
+# Set mod key to alt
+set $mod Mod1
+
+# Variables
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term alacritty
+set $menu wofi --show drun --insensitive --lines 5 --prompt ""
+
+set $wallpaper ~/Pictures/wallpaper.png
+set $lock_cmd swaylock --daemonize --color 000000
+set $sleep_cmd systemctl suspend
+
+# Wallpaper
+output * bg $wallpaper fill
+
+# Touchpad configuration
+input type:touchpad {
+	tap enabled # Tap to click
+	natural_scroll enabled # Natural scrolling
+	click_method clickfinger # Two finger clicking
+	dwt disabled # Enabled while typing
+}
+
+# Open a terminal
+bindsym $mod+Return exec /usr/bin/alacritty
+
+# Start firefox
+bindsym $mod+Shift+Return exec /usr/bin/firefox
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Start your launcher
+bindsym $mod+Space exec $menu
+
+# Drag floating windows
+floating_modifier $mod normal
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Changing focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# Move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# Switch to another workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+# Move focused window to another workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# Splitting
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+# Make the current window fullscreen
+bindsym $mod+f fullscreen
+
+# Make the current window float
+bindsym $mod+Shift+f floating toggle
+
+# Move the current window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+bindsym $mod+minus scratchpad show
+
+
+# Resizing windows
+bindsym $mod+r mode "resize"
+mode "resize" {
+    bindsym $left resize shrink width 10ppt
+    bindsym $down resize grow height 10ppt
+    bindsym $up resize shrink height 10ppt
+    bindsym $right resize grow width 10ppt
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+
+# Status bar
+bar {
+	position top
+    status_command /usr/bin/i3status-rs ~/.config/i3status-rs/config.toml
+}
+
+# Remove window titles
+default_border pixel 2
+
+# Run gammastep
+exec gammastep -l '40.71:-74.00'
+
+# Run spotifyd
+exec spotifyd
+
+# Media keys
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym --locked XF86MonBrightnessDown exec light -U 5
+bindsym --locked XF86MonBrightnessUp exec light -A 5
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous
+
+# Lock system bind
+bindsym $mod+ctrl+l exec $lock_cmd
+
+# File explorer bind
+bindsym $mod+Shift+n exec alacritty -e "nnn"
+
+# Screenshot on printscreen
+bindsym Print exec grim -g "$(slurp)" "screenshot-$(date +'%F-%H-%M-%S').png"
+
+# Swayidle config
+exec swayidle -w \
+    timeout 900 '$lock_cmd' \
+    timeout 1200 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    timeout 1800 '$sleep_cmd' \
+    before-sleep '$lock_cmd' \
+    lock '$lock_cmd'
+
+
+include /etc/sway/config.d/*

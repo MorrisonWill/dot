@@ -1,0 +1,40 @@
+theme = "modern"
+icons = "awesome5"
+
+[[block]]
+block = "networkmanager"
+on_click = "alacritty -e nmtui"
+interface_name_exclude = ["br\\-[0-9a-f]{12}", "docker\\d+"]
+interface_name_include = []
+ap_format = "{ssid^10}"
+connection_format = "{id}"
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{mem_used_percents}"
+format_swap = "{swap_used_percents}"
+
+[[block]]
+block = "cpu"
+interval = 1
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "temperature"
+collapsed = true
+interval = 10
+format = "{min} min, {max} max, {average} avg"
+chip = "*-isa-*"
+
+[[block]]
+block = "battery"
+interval = 10
+format = "{percentage} {time}"
+
+[[block]]
+block = "time"
+interval = 5
+format = "%a %m/%d %R"
