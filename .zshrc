@@ -26,3 +26,7 @@ _CLI_ZSH_AUTOCOMPLETE_HACK=1
 source /etc/zsh/zsh_autocomplete_croc
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+ export OPENAI_API_KEY='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'
+
+ export PATH=/home/user/.nimble/bin:$PATH

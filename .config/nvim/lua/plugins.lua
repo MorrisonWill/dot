@@ -26,6 +26,17 @@ return require("packer").startup(function()
 		end,
 	})
 
+	use({
+		"jameshiew/nvim-magic",
+		config = function()
+			require("nvim-magic").setup()
+		end,
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+		},
+	})
+
 	-- Surround plugin
 	use("tpope/vim-surround")
 
@@ -107,8 +118,10 @@ return require("packer").startup(function()
 			lsp.zls.setup({})
 			lsp.svelte.setup({})
 			lsp.clangd.setup({})
+			lsp.elixirls.setup({ cmd = { "/home/user/elixir-ls/release/language_server.sh" } })
 		end,
 	})
+
 	use({
 		"folke/trouble.nvim",
 		opt = true,
