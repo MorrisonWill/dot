@@ -27,6 +27,6 @@ source /etc/zsh/zsh_autocomplete_croc
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
- export OPENAI_API_KEY='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'
+ export OPENAI_API_KEY='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'
 
  export PATH=/home/user/.nimble/bin:$PATH

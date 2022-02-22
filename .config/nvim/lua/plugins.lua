@@ -21,7 +21,7 @@ return require("packer").startup(function()
 	use({
 		"navarasu/onedark.nvim",
 		config = function()
-			vim.g.onedark_style = "dark"
+			style = "darker"
 			vim.cmd([[colorscheme onedark]])
 		end,
 	})
@@ -118,7 +118,16 @@ return require("packer").startup(function()
 			lsp.zls.setup({})
 			lsp.svelte.setup({})
 			lsp.clangd.setup({})
-			lsp.elixirls.setup({ cmd = { "/home/user/elixir-ls/release/language_server.sh" } })
+			lsp.elixirls.setup({
+				cmd = { "/home/user/elixir-ls/release/language_server.sh" },
+				settings = {
+					elixirLS = {
+						dialyzerEnabled = false,
+					},
+				},
+			})
+			lsp.tsserver.setup({})
+			lsp.svls.setup({})
 		end,
 	})
 
@@ -180,6 +189,7 @@ return require("packer").startup(function()
 				lua = { "stylua" },
 				python = { "black" },
 				c = { "clang-format" },
+				elixir = { "mix_format" },
 			}
 			vim.g.ale_fix_on_save = 1
 			vim.g.ale_disable_lsp = 1
