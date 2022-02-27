@@ -39,3 +39,5 @@ bindkey -v
 export KEYTIMEOUT=1
 
 alias '?'="/home/user/.w3m/duck"
+
+unset TMUX
