@@ -17,6 +17,9 @@ return require("packer").startup(function()
 	-- Packer manages itself
 	use("wbthomason/packer.nvim")
 
+	-- Adaptive tabbing
+	use("tpope/vim-sleuth")
+
 	-- Color scheme
 	use({
 		"navarasu/onedark.nvim",
@@ -35,16 +38,7 @@ return require("packer").startup(function()
 
 	use("TovarishFin/vim-solidity")
 
-	use({
-		"jameshiew/nvim-magic",
-		config = function()
-			require("nvim-magic").setup()
-		end,
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-		},
-	})
+	use("christoomey/vim-tmux-navigator")
 
 	-- Surround plugin
 	use("tpope/vim-surround")
@@ -97,6 +91,14 @@ return require("packer").startup(function()
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				highlight = { enable = true },
+				incremental_selection = {
+					enable = true,
+					keymaps = {
+						init_selection = "<CR>",
+						node_incremental = "<CR>",
+						node_decremental = "<BS>",
+					},
+				},
 			})
 		end,
 	})
@@ -123,7 +125,7 @@ return require("packer").startup(function()
 			local lsp = require("lspconfig")
 			lsp.gopls.setup({})
 			lsp.rust_analyzer.setup({})
-			lsp.pyright.setup({})
+			lsp.jedi_language_server.setup({})
 			lsp.zls.setup({})
 			lsp.svelte.setup({})
 			lsp.clangd.setup({})
@@ -138,6 +140,9 @@ return require("packer").startup(function()
 			lsp.tsserver.setup({})
 			lsp.svls.setup({})
 			lsp.solc.setup({})
+			lsp.sumneko_lua.setup({})
+			lsp.gdscript.setup({})
+			lsp.kotlin_language_server.setup({})
 		end,
 	})
 
@@ -178,6 +183,8 @@ return require("packer").startup(function()
 			})
 		end,
 	})
+
+	use({ "github/copilot.vim" })
 
 	-- Linting and auto fixing
 	use({
@@ -244,4 +251,7 @@ return require("packer").startup(function()
 			})
 		end,
 	})
+
+	-- Lightspeed
+	use({ "ggandor/lightspeed.nvim" })
 end)

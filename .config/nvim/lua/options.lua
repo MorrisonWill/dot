@@ -13,3 +13,20 @@ vim.opt.expandtab = true
 -- Formatting options
 vim.g.ale_c_clangformat_options =
 	'-style="{IndentWidth: 4, SpaceAroundPointerQualifiers: Both, PointerAlignment: Middle, SpaceAfterLogicalNot: true}"'
+
+-- Saving
+vim.opt.backup = true
+vim.opt.swapfile = true
+vim.opt.undofile = true
+
+vim.opt.backupdir = "/home/user/vimbackup/backup"
+vim.opt.dir = "/home/user/vimbackup/swap"
+vim.opt.undodir = "/home/user/vimbackup/undo"
+
+-- autoformat
+vim.cmd([[
+            augroup LspFormatting
+                autocmd! * <buffer>
+                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+            augroup END
+            ]])

@@ -28,6 +28,7 @@ source /etc/zsh/zsh_autocomplete_croc
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
  export PATH=/home/user/.nimble/bin:$PATH
+ export PATH=/home/user/lua-ls/bin:$PATH
 
  export GOPATH=$HOME/go
 
@@ -41,3 +42,13 @@ export KEYTIMEOUT=1
 alias '?'="/home/user/.w3m/duck"
 
 unset TMUX
+
+alias vim=nvim
+
+bindkey "^?" backward-delete-char
+
+alias rm='rmtrash'
+alias rmdir='rmdirtrash'
+alias sudo='sudo '
+
+export EDITOR=nvim
