@@ -52,3 +52,8 @@ alias rmdir='rmdirtrash'
 alias sudo='sudo '
 
 export EDITOR=nvim
+
+# make intellij work
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+source /usr/share/fzf/key-bindings.zsh

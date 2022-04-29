@@ -125,7 +125,7 @@ return require("packer").startup(function()
 			local lsp = require("lspconfig")
 			lsp.gopls.setup({})
 			lsp.rust_analyzer.setup({})
-			lsp.jedi_language_server.setup({})
+			lsp.pyright.setup({})
 			lsp.zls.setup({})
 			lsp.svelte.setup({})
 			lsp.clangd.setup({})
@@ -204,8 +204,9 @@ return require("packer").startup(function()
 				rust = { "rustfmt" },
 				svelte = { "prettier" },
 				lua = { "stylua" },
-				python = { "black" },
+				-- python = { "black" },
 				c = { "clang-format" },
+				kotlin = { "ktlint" },
 				elixir = { "mix_format" },
 			}
 			vim.g.ale_fix_on_save = 1
@@ -252,6 +253,11 @@ return require("packer").startup(function()
 		end,
 	})
 
+	-- Wiki
+	use({ "lervag/wiki.vim" })
+
 	-- Lightspeed
 	use({ "ggandor/lightspeed.nvim" })
+
+	use({ "TimUntersberger/neogit" })
 end)

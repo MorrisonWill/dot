@@ -157,3 +157,5 @@ exec swayidle -w \
 
 
 include /etc/sway/config.d/*
+
+xwayland scale 2

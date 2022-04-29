@@ -23,10 +23,12 @@ vim.opt.backupdir = "/home/user/vimbackup/backup"
 vim.opt.dir = "/home/user/vimbackup/swap"
 vim.opt.undodir = "/home/user/vimbackup/undo"
 
--- autoformat
-vim.cmd([[
-            augroup LspFormatting
-                autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-            augroup END
-            ]])
+-- Vim wiki
+vim.g.wiki_root = "~/notes"
+vim.g.wiki_filetypes = { "md" }
+vim.g.wiki_link_extension = ".md"
+
+-- Fold
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.wo.foldenable = false
